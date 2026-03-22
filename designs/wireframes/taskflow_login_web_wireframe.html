@@ -1,0 +1,92 @@
+
+<style>
+.wf-screen { background: #f5f5f5; border-radius: 12px; padding: 24px; font-family: var(--font-sans); }
+.wf-browser { background: #e0e0e0; border-radius: 8px 8px 0 0; padding: 8px 12px; display: flex; align-items: center; gap: 8px; }
+.wf-dot { width: 10px; height: 10px; border-radius: 50%; background: #bbb; display: inline-block; }
+.wf-url { flex: 1; background: #fff; border-radius: 4px; padding: 3px 10px; font-size: 11px; color: #888; margin: 0 8px; }
+.wf-page { background: #fff; border-radius: 0 0 8px 8px; padding: 40px 20px; min-height: 420px; display: flex; align-items: center; justify-content: center; border: 0.5px solid #ddd; border-top: none; }
+.wf-card { width: 340px; border: 1.5px dashed #aaa; border-radius: 10px; padding: 32px 28px; background: #fafafa; }
+.wf-logo { text-align: center; margin-bottom: 24px; }
+.wf-logo-box { display: inline-block; width: 48px; height: 48px; border: 2px dashed #aaa; border-radius: 10px; line-height: 48px; font-size: 11px; color: #aaa; }
+.wf-title { font-size: 18px; font-weight: 500; color: #333; text-align: center; margin: 8px 0 4px; }
+.wf-sub { font-size: 12px; color: #999; text-align: center; margin-bottom: 24px; }
+.wf-label { font-size: 12px; color: #666; margin-bottom: 4px; }
+.wf-input { width: 100%; box-sizing: border-box; border: 1.5px dashed #bbb; border-radius: 6px; padding: 10px 12px; font-size: 13px; color: #aaa; background: #f0f0f0; margin-bottom: 16px; }
+.wf-btn { width: 100%; border: none; border-radius: 6px; padding: 11px; font-size: 14px; font-weight: 500; background: #333; color: #fff; margin-top: 4px; cursor: default; }
+.wf-link { text-align: center; font-size: 12px; color: #aaa; margin-top: 16px; }
+.wf-anno { font-size: 11px; color: #888; border-left: 3px solid #ccc; padding-left: 8px; margin: 6px 0; }
+.wf-tag { display: inline-block; font-size: 10px; background: #e8e8e8; color: #666; border-radius: 4px; padding: 2px 7px; margin-left: 6px; vertical-align: middle; }
+.mobile-frame { width: 220px; border: 3px solid #555; border-radius: 28px; overflow: hidden; background: #fff; margin: 0 auto; }
+.mobile-notch { background: #555; height: 24px; border-radius: 0; display: flex; align-items: center; justify-content: center; }
+.mobile-notch-pill { width: 60px; height: 8px; background: #333; border-radius: 4px; }
+.mobile-screen { padding: 24px 18px 28px; background: #fff; }
+.mobile-statusbar { display: flex; justify-content: space-between; font-size: 9px; color: #999; margin-bottom: 20px; }
+</style>
+
+<div style="display:grid; grid-template-columns: 1fr 1fr; gap: 24px; padding: 8px 0;">
+
+  <div>
+    <p style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">Web version — Sarah's Windows PC</p>
+    <div class="wf-screen">
+      <div class="wf-browser">
+        <span class="wf-dot"></span><span class="wf-dot"></span><span class="wf-dot"></span>
+        <span class="wf-url">taskflow.app/login</span>
+      </div>
+      <div class="wf-page">
+        <div class="wf-card">
+          <div class="wf-logo">
+            <div class="wf-logo-box">LOGO</div>
+            <div class="wf-title">TaskFlow</div>
+            <div class="wf-sub">Sign in to your account</div>
+          </div>
+          <div class="wf-label">Email address <span class="wf-tag">required</span></div>
+          <div class="wf-input">sarah@agency.com</div>
+          <div class="wf-label">Password <span class="wf-tag">required</span></div>
+          <div class="wf-input">••••••••</div>
+          <div style="text-align:right; margin-top:-10px; margin-bottom:16px;">
+            <span style="font-size:11px; color:#aaa;">Forgot password?</span>
+          </div>
+          <button class="wf-btn">Sign in</button>
+          <div class="wf-link">Need help? Contact your admin</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="wf-anno">Centered card — max width 380px</div>
+      <div class="wf-anno">No registration link — admin creates accounts</div>
+      <div class="wf-anno">Error shown below password field on wrong login</div>
+      <div class="wf-anno">After login → redirects to role-based screen</div>
+    </div>
+  </div>
+
+  <div>
+    <p style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">Mobile version — Android staff</p>
+    <div class="wf-screen" style="display:flex; align-items:center; justify-content:center; min-height:380px;">
+      <div class="mobile-frame">
+        <div class="mobile-notch"><div class="mobile-notch-pill"></div></div>
+        <div class="mobile-screen">
+          <div class="mobile-statusbar"><span>9:41</span><span>●●●</span></div>
+          <div style="text-align:center; margin-bottom:20px;">
+            <div style="width:36px; height:36px; border:2px dashed #aaa; border-radius:8px; display:inline-block; line-height:36px; font-size:9px; color:#aaa;">LOGO</div>
+            <div style="font-size:14px; font-weight:500; color:#333; margin-top:6px;">TaskFlow</div>
+            <div style="font-size:10px; color:#999;">Sign in to continue</div>
+          </div>
+          <div style="font-size:10px; color:#666; margin-bottom:3px;">Email</div>
+          <div style="border:1.5px dashed #bbb; border-radius:6px; padding:8px 10px; font-size:10px; color:#aaa; background:#f0f0f0; margin-bottom:12px;">your@email.com</div>
+          <div style="font-size:10px; color:#666; margin-bottom:3px;">Password</div>
+          <div style="border:1.5px dashed #bbb; border-radius:6px; padding:8px 10px; font-size:10px; color:#aaa; background:#f0f0f0; margin-bottom:6px;">••••••••</div>
+          <div style="text-align:right; margin-bottom:14px;"><span style="font-size:9px; color:#aaa;">Forgot password?</span></div>
+          <div style="background:#333; border-radius:6px; padding:9px; text-align:center; font-size:11px; color:#fff; font-weight:500;">Sign in</div>
+          <div style="text-align:center; font-size:9px; color:#bbb; margin-top:12px;">Contact your manager for help</div>
+        </div>
+      </div>
+    </div>
+    <div style="margin-top:12px;">
+      <div class="wf-anno">Full-width layout — no card border needed</div>
+      <div class="wf-anno">Large tap targets — minimum 44px height</div>
+      <div class="wf-anno">Keyboard auto-opens on email field tap</div>
+      <div class="wf-anno">After login → staff sees only their tasks</div>
+    </div>
+  </div>
+
+</div>

@@ -1,0 +1,113 @@
+
+<style>
+.vf { font-family:var(--font-sans); }
+.vf-browser { background:#e0e0e0; border-radius:8px 8px 0 0; padding:8px 12px; display:flex; align-items:center; gap:8px; }
+.vf-dot { width:10px; height:10px; border-radius:50%; background:#bbb; display:inline-block; }
+.vf-url { flex:1; background:#fff; border-radius:4px; padding:3px 10px; font-size:11px; color:#888; margin:0 8px; }
+.vf-body { display:grid; grid-template-columns:180px 1fr; background:#f0f0f0; border-radius:0 0 8px 8px; min-height:440px; }
+.vf-sidebar { background:#1e1e1e; padding:16px 0; border-radius:0 0 0 8px; }
+.vf-sb-item { padding:9px 16px; font-size:12px; color:#aaa; }
+.vf-sb-item.active { background:#2e4a7a; color:#fff; border-left:3px solid #4a7fcb; }
+.vf-sb-sec { font-size:10px; color:#555; padding:12px 16px 4px; text-transform:uppercase; letter-spacing:.06em; }
+.vf-main { padding:18px; }
+.vf-topbar { display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
+.vf-page-title { font-size:15px; font-weight:500; color:#333; }
+.vf-alert { background:#fff8e1; border:1px solid #ffe082; border-radius:6px; padding:8px 12px; font-size:11px; color:#856404; margin-bottom:14px; display:flex; align-items:center; gap:8px; }
+.vf-card { background:#fff; border-radius:8px; border:0.5px solid #ddd; padding:14px 16px; margin-bottom:10px; }
+.vf-card-top { display:flex; align-items:flex-start; justify-content:space-between; margin-bottom:8px; }
+.vf-card-title { font-size:13px; font-weight:500; color:#222; }
+.vf-card-staff { font-size:11px; color:#888; margin-top:2px; }
+.vf-badge { display:inline-block; font-size:10px; padding:2px 8px; border-radius:8px; font-weight:500; }
+.vf-badge.done { background:#d4edda; color:#155724; }
+.vf-badge.verif { background:#cce5ff; color:#004085; }
+.vf-card-meta { font-size:11px; color:#aaa; margin-bottom:10px; }
+.vf-card-note { background:#f8f8f8; border-radius:5px; padding:8px 10px; font-size:11px; color:#666; margin-bottom:12px; border-left:3px solid #ddd; font-style:italic; }
+.vf-actions { display:flex; gap:8px; }
+.vf-btn-verify { flex:1; background:#1a6a1a; color:#fff; border:none; border-radius:6px; padding:8px; font-size:11px; font-weight:500; cursor:default; }
+.vf-btn-reject { background:#fff; color:#a02020; border:1px dashed #e05c5c; border-radius:6px; padding:8px 14px; font-size:11px; cursor:default; }
+.vf-btn-view { background:#fff; color:#4a7fcb; border:1px dashed #4a7fcb; border-radius:6px; padding:8px 14px; font-size:11px; cursor:default; }
+.wf-anno { font-size:11px; color:#888; border-left:3px solid #ccc; padding-left:8px; margin:4px 0; }
+</style>
+
+<div class="vf" style="padding:8px 0;">
+  <p style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">Verification screen — admin web (Sarah reviews completed tasks)</p>
+
+  <div style="border-radius:8px; overflow:hidden; border:0.5px solid #ccc;">
+    <div class="vf-browser">
+      <span class="vf-dot"></span><span class="vf-dot"></span><span class="vf-dot"></span>
+      <span class="vf-url">taskflow.app/tasks/pending-verification</span>
+    </div>
+    <div class="vf-body">
+      <div class="vf-sidebar">
+        <div class="vf-sb-sec">Main</div>
+        <div class="vf-sb-item">Dashboard</div>
+        <div class="vf-sb-item">All tasks</div>
+        <div class="vf-sb-item">Create task</div>
+        <div class="vf-sb-sec">Team</div>
+        <div class="vf-sb-item active">Verify tasks</div>
+        <div class="vf-sb-item">Staff list</div>
+        <div class="vf-sb-item">Reports</div>
+        <div class="vf-sb-sec">Settings</div>
+        <div class="vf-sb-item">Manage users</div>
+      </div>
+      <div class="vf-main">
+        <div class="vf-topbar">
+          <span class="vf-page-title">Pending verification</span>
+          <span style="font-size:11px; color:#888;">5 tasks awaiting your review</span>
+        </div>
+
+        <div class="vf-alert">
+          ⚠ 2 tasks are overdue and still unverified — please review these first
+        </div>
+
+        <div class="vf-card">
+          <div class="vf-card-top">
+            <div>
+              <div class="vf-card-title">Design social media banner</div>
+              <div class="vf-card-staff">Rina  ·  Due: 25 Mar</div>
+            </div>
+            <div class="vf-badge done">Done</div>
+          </div>
+          <div class="vf-card-meta">Completed: 22 Mar at 10:14 AM  ·  Medium priority</div>
+          <div class="vf-card-note">"Completed the banner in 3 sizes as requested. File uploaded to shared Drive folder."</div>
+          <div class="vf-actions">
+            <button class="vf-btn-view">View file</button>
+            <button class="vf-btn-reject">Send back</button>
+            <button class="vf-btn-verify">✓ Mark as verified</button>
+          </div>
+        </div>
+
+        <div class="vf-card">
+          <div class="vf-card-top">
+            <div>
+              <div class="vf-card-title">Send newsletter to client list</div>
+              <div class="vf-card-staff">Sari  ·  Due: 26 Mar</div>
+            </div>
+            <div class="vf-badge done">Done</div>
+          </div>
+          <div class="vf-card-meta">Completed: 21 Mar at 3:45 PM  ·  Low priority</div>
+          <div class="vf-card-note">"Newsletter sent to 240 subscribers. Open rate will be available tomorrow."</div>
+          <div class="vf-actions">
+            <button class="vf-btn-view">View evidence</button>
+            <button class="vf-btn-reject">Send back</button>
+            <button class="vf-btn-verify">✓ Mark as verified</button>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:12px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+    <div>
+      <div class="wf-anno">Dedicated page — Sarah comes here to do her checks</div>
+      <div class="wf-anno">Alert banner highlights overdue unverified tasks first</div>
+      <div class="wf-anno">Staff notes visible — Sarah reads what was actually done</div>
+    </div>
+    <div>
+      <div class="wf-anno">"Send back" = reject and return task to In Progress</div>
+      <div class="wf-anno">"Mark as verified" = closes the task permanently</div>
+      <div class="wf-anno">This screen solves the core BRD problem — real validation!</div>
+    </div>
+  </div>
+</div>

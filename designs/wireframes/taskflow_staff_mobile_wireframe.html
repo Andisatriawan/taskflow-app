@@ -1,0 +1,98 @@
+
+<style>
+.m-wrap { display: flex; gap: 32px; justify-content: center; align-items: flex-start; flex-wrap: wrap; padding: 8px 0; }
+.m-frame { width: 220px; border: 3px solid #444; border-radius: 32px; overflow: hidden; background: #fff; flex-shrink: 0; }
+.m-notch { background: #444; height: 26px; display: flex; align-items: center; justify-content: center; }
+.m-pill { width: 60px; height: 8px; background: #222; border-radius: 4px; }
+.m-screen { padding: 14px 14px 24px; }
+.m-status { display: flex; justify-content: space-between; font-size: 9px; color: #999; margin-bottom: 14px; }
+.m-header { display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px; }
+.m-greeting { font-size: 13px; font-weight: 500; color: #222; }
+.m-date { font-size: 9px; color: #aaa; }
+.m-tabs { display: flex; gap: 4px; margin-bottom: 12px; margin-top: 10px; }
+.m-tab { flex: 1; text-align: center; font-size: 9px; padding: 5px 0; border-radius: 5px; background: #f0f0f0; color: #888; }
+.m-tab.active { background: #2a2a2a; color: #fff; }
+.m-card { border: 1px solid #eee; border-radius: 8px; padding: 10px; margin-bottom: 8px; background: #fafafa; }
+.m-card.high { border-left: 3px solid #e05c5c; }
+.m-card.med { border-left: 3px solid #e0a020; }
+.m-card.low { border-left: 3px solid #3a9a3a; }
+.m-card-title { font-size: 11px; font-weight: 500; color: #222; margin-bottom: 4px; }
+.m-card-meta { font-size: 9px; color: #aaa; margin-bottom: 8px; }
+.m-card-btn { font-size: 9px; background: #2a2a2a; color: #fff; border: none; border-radius: 4px; padding: 5px 10px; width: 100%; cursor: default; }
+.m-card-btn.done { background: #f0f0f0; color: #888; }
+.m-badge { display: inline-block; font-size: 8px; padding: 1px 6px; border-radius: 8px; font-weight: 500; }
+.m-badge.prog { background: #fff3cd; color: #856404; }
+.m-badge.done { background: #d4edda; color: #155724; }
+.m-badge.todo { background: #eee; color: #666; }
+.anno-col { max-width: 200px; }
+.wf-anno { font-size: 11px; color: #888; border-left: 3px solid #ccc; padding-left: 8px; margin: 5px 0; }
+</style>
+
+<div style="padding:8px 0;">
+  <p style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin:0 0 16px; text-transform:uppercase; letter-spacing:.05em;">Staff mobile view — Android (Budi's phone)</p>
+
+  <div class="m-wrap">
+
+    <div class="m-frame">
+      <div class="m-notch"><div class="m-pill"></div></div>
+      <div class="m-screen">
+        <div class="m-status"><span>9:41</span><span>●●● WiFi</span></div>
+        <div class="m-header">
+          <div class="m-greeting">Hi, Budi 👋</div>
+        </div>
+        <div class="m-date">Sunday, 22 March 2026</div>
+        <div class="m-tabs">
+          <div class="m-tab active">My tasks</div>
+          <div class="m-tab">Done</div>
+          <div class="m-tab">All</div>
+        </div>
+
+        <div class="m-card high">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="m-card-title">Write client report Q1</div>
+            <div class="m-badge prog">In progress</div>
+          </div>
+          <div class="m-card-meta">Due: 24 Mar  ·  High priority</div>
+          <button class="m-card-btn">Mark as done</button>
+        </div>
+
+        <div class="m-card med">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="m-card-title">Prepare analytics summary</div>
+            <div class="m-badge todo">To do</div>
+          </div>
+          <div class="m-card-meta">Due: 28 Mar  ·  Medium priority</div>
+          <button class="m-card-btn">Start task</button>
+        </div>
+
+        <div class="m-card low">
+          <div style="display:flex; justify-content:space-between; align-items:center;">
+            <div class="m-card-title">Review competitor ads</div>
+            <div class="m-badge done">Done</div>
+          </div>
+          <div class="m-card-meta">Due: 20 Mar  ·  Low priority</div>
+          <button class="m-card-btn done">Awaiting verification</button>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="anno-col" style="padding-top:40px;">
+      <div class="wf-anno">Staff only sees their own tasks — never others</div>
+      <div class="wf-anno">3 tabs: active tasks, completed, all history</div>
+      <div class="wf-anno">Coloured left border = priority level at a glance</div>
+      <div class="wf-anno">One big button per task — max 2 clicks to update</div>
+      <div class="wf-anno">"Awaiting verification" — staff knows Sarah must check</div>
+      <div class="wf-anno">No complicated menus — designed for non-tech users</div>
+      <div style="margin-top:16px;">
+        <div style="font-size:11px; font-weight:500; color:var(--color-text-secondary); margin-bottom:6px;">Button states:</div>
+        <div style="font-size:11px; background:#2a2a2a; color:#fff; border-radius:4px; padding:5px 10px; margin-bottom:4px; display:inline-block;">Start task</div>
+        <div style="font-size:11px; margin:0 0 4px; color:#888;">↓ tap once</div>
+        <div style="font-size:11px; background:#2a2a2a; color:#fff; border-radius:4px; padding:5px 10px; margin-bottom:4px; display:inline-block;">Mark as done</div>
+        <div style="font-size:11px; margin:0 0 4px; color:#888;">↓ tap once</div>
+        <div style="font-size:11px; background:#f0f0f0; color:#888; border-radius:4px; padding:5px 10px; display:inline-block;">Awaiting verification</div>
+      </div>
+    </div>
+
+  </div>
+</div>

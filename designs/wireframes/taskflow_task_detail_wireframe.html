@@ -1,0 +1,107 @@
+
+<style>
+.td-wrap { display:flex; gap:32px; justify-content:center; align-items:flex-start; flex-wrap:wrap; padding:8px 0; }
+.m-frame { width:224px; border:3px solid #444; border-radius:32px; overflow:hidden; background:#fff; flex-shrink:0; }
+.m-notch { background:#444; height:26px; display:flex; align-items:center; justify-content:center; }
+.m-pill { width:60px; height:8px; background:#222; border-radius:4px; }
+.m-screen { padding:14px 14px 28px; }
+.m-statusbar { display:flex; justify-content:space-between; font-size:9px; color:#999; margin-bottom:12px; }
+.td-back { font-size:10px; color:#4a7fcb; margin-bottom:12px; }
+.td-badge { display:inline-block; font-size:9px; padding:2px 8px; border-radius:8px; font-weight:500; margin-bottom:10px; }
+.td-badge.prog { background:#fff3cd; color:#856404; }
+.td-title { font-size:13px; font-weight:500; color:#222; margin-bottom:6px; line-height:1.4; }
+.td-meta { font-size:9px; color:#aaa; margin-bottom:12px; line-height:1.8; }
+.td-desc-label { font-size:10px; font-weight:500; color:#666; margin-bottom:4px; }
+.td-desc { font-size:10px; color:#888; background:#f8f8f8; border-radius:5px; padding:8px; margin-bottom:12px; line-height:1.5; border:0.5px solid #eee; }
+.td-status-label { font-size:10px; font-weight:500; color:#666; margin-bottom:6px; }
+.td-status-steps { display:flex; align-items:center; margin-bottom:14px; }
+.td-step { flex:1; text-align:center; font-size:8px; }
+.td-step-dot { width:14px; height:14px; border-radius:50%; margin:0 auto 3px; display:flex; align-items:center; justify-content:center; font-size:7px; color:#fff; }
+.td-step-dot.done-s { background:#2a7a2a; }
+.td-step-dot.active-s { background:#2a2a2a; border:2px solid #4a7fcb; }
+.td-step-dot.empty-s { background:#ddd; }
+.td-step-line { flex:1; height:2px; background:#ddd; margin-bottom:11px; }
+.td-step-line.done-l { background:#2a7a2a; }
+.td-btn-main { width:100%; background:#2a2a2a; color:#fff; border:none; border-radius:6px; padding:10px; font-size:11px; font-weight:500; margin-bottom:6px; cursor:default; text-align:center; }
+.td-btn-sec { width:100%; background:#f0f0f0; color:#888; border:none; border-radius:6px; padding:8px; font-size:10px; cursor:default; text-align:center; }
+.anno-col { max-width:210px; padding-top:30px; }
+.wf-anno { font-size:11px; color:#888; border-left:3px solid #ccc; padding-left:8px; margin:5px 0; }
+</style>
+
+<div style="padding:8px 0;">
+  <p style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin:0 0 16px; text-transform:uppercase; letter-spacing:.05em;">Task detail & status update — staff mobile (Budi taps a task)</p>
+
+  <div class="td-wrap">
+    <div class="m-frame">
+      <div class="m-notch"><div class="m-pill"></div></div>
+      <div class="m-screen">
+        <div class="m-statusbar"><span>9:41</span><span>●●● WiFi</span></div>
+
+        <div class="td-back">← Back to my tasks</div>
+
+        <div class="td-badge prog">In progress</div>
+
+        <div class="td-title">Write client report Q1</div>
+
+        <div class="td-meta">
+          Assigned by: Sarah<br>
+          Due: 24 March 2026<br>
+          Priority: High<br>
+          Category: Reporting
+        </div>
+
+        <div class="td-desc-label">Instructions</div>
+        <div class="td-desc">
+          Write the Q1 performance report for PT Maju Bersama. Include social media stats and ad spend summary. Use the template in Google Drive.
+        </div>
+
+        <div class="td-status-label">Progress</div>
+        <div class="td-status-steps">
+          <div class="td-step">
+            <div class="td-step-dot done-s">✓</div>
+            <div style="font-size:7px; color:#2a7a2a;">To do</div>
+          </div>
+          <div class="td-step-line done-l"></div>
+          <div class="td-step">
+            <div class="td-step-dot active-s"></div>
+            <div style="font-size:7px; color:#333; font-weight:500;">In progress</div>
+          </div>
+          <div class="td-step-line"></div>
+          <div class="td-step">
+            <div class="td-step-dot empty-s"></div>
+            <div style="font-size:7px; color:#aaa;">Done</div>
+          </div>
+          <div class="td-step-line"></div>
+          <div class="td-step">
+            <div class="td-step-dot empty-s"></div>
+            <div style="font-size:7px; color:#aaa;">Verified</div>
+          </div>
+        </div>
+
+        <div class="td-btn-main">Mark as done</div>
+        <div class="td-btn-sec">Add a note to Sarah</div>
+
+      </div>
+    </div>
+
+    <div class="anno-col">
+      <div class="wf-anno">Back button — always easy to return to task list</div>
+      <div class="wf-anno">Full task details visible — no guessing required</div>
+      <div class="wf-anno">Progress bar shows exactly where the task stands</div>
+      <div class="wf-anno">Verified step is greyed — only Sarah can set this</div>
+      <div class="wf-anno">One big primary action button — maximum clarity</div>
+      <div class="wf-anno">"Add a note" lets staff communicate to Sarah</div>
+
+      <div style="margin-top:20px; border:1px dashed #ccc; border-radius:8px; padding:12px; background:#fafafa;">
+        <div style="font-size:11px; font-weight:500; color:#555; margin-bottom:8px;">Status flow (staff controls):</div>
+        <div style="font-size:10px; color:#888; line-height:2;">
+          To do → tap "Start task"<br>
+          In progress → tap "Mark as done"<br>
+          Done → shows "Awaiting verification"<br>
+          Verified → Sarah sets this only
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>

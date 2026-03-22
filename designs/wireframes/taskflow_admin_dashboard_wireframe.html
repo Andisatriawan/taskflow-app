@@ -1,0 +1,143 @@
+
+<style>
+.db { font-family: var(--font-sans); background: #f0f0f0; border-radius: 10px; overflow: hidden; }
+.db-nav { background: #2a2a2a; padding: 10px 16px; display: flex; align-items: center; justify-content: space-between; }
+.db-nav-logo { color: #fff; font-size: 13px; font-weight: 500; }
+.db-nav-user { color: #aaa; font-size: 11px; }
+.db-nav-badge { display: inline-block; background: #4a7fcb; color: #fff; font-size: 10px; padding: 2px 7px; border-radius: 10px; margin-left: 6px; }
+.db-body { display: grid; grid-template-columns: 180px 1fr; min-height: 460px; }
+.db-sidebar { background: #1e1e1e; padding: 16px 0; }
+.db-sidebar-item { padding: 9px 16px; font-size: 12px; color: #aaa; cursor: default; }
+.db-sidebar-item.active { background: #2e4a7a; color: #fff; border-left: 3px solid #4a7fcb; }
+.db-sidebar-section { font-size: 10px; color: #555; padding: 12px 16px 4px; text-transform: uppercase; letter-spacing: .06em; }
+.db-main { padding: 16px; }
+.db-topbar { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+.db-topbar-title { font-size: 15px; font-weight: 500; color: #333; }
+.db-btn { font-size: 11px; background: #2a2a2a; color: #fff; border: none; border-radius: 5px; padding: 6px 12px; cursor: default; }
+.db-stats { display: grid; grid-template-columns: repeat(4, 1fr); gap: 8px; margin-bottom: 14px; }
+.db-stat { background: #fff; border-radius: 7px; padding: 10px 12px; border: 0.5px solid #ddd; }
+.db-stat-label { font-size: 10px; color: #999; margin-bottom: 3px; }
+.db-stat-num { font-size: 20px; font-weight: 500; color: #333; }
+.db-stat-num.green { color: #2a7a2a; }
+.db-stat-num.amber { color: #b07000; }
+.db-stat-num.red { color: #a02020; }
+.db-filters { display: flex; gap: 6px; margin-bottom: 12px; }
+.db-filter { font-size: 11px; border: 1px dashed #bbb; border-radius: 5px; padding: 4px 10px; color: #666; cursor: default; background: #fff; }
+.db-filter.active { background: #2a2a2a; color: #fff; border-color: #2a2a2a; }
+.db-table-head { display: grid; grid-template-columns: 2fr 1.2fr 1fr 1fr 1fr; gap: 8px; padding: 6px 10px; background: #eee; border-radius: 5px; margin-bottom: 4px; }
+.db-table-head span { font-size: 10px; color: #888; font-weight: 500; text-transform: uppercase; letter-spacing: .04em; }
+.db-row { display: grid; grid-template-columns: 2fr 1.2fr 1fr 1fr 1fr; gap: 8px; padding: 8px 10px; background: #fff; border-radius: 5px; margin-bottom: 4px; border: 0.5px solid #eee; align-items: center; }
+.db-row span { font-size: 11px; color: #444; }
+.db-badge { display: inline-block; font-size: 10px; padding: 2px 8px; border-radius: 10px; font-weight: 500; }
+.db-badge.todo { background: #eee; color: #666; }
+.db-badge.prog { background: #fff3cd; color: #856404; }
+.db-badge.done { background: #d4edda; color: #155724; }
+.db-badge.verif { background: #cce5ff; color: #004085; }
+.db-badge.high { background: #f8d7da; color: #721c24; }
+.db-badge.med { background: #fff3cd; color: #856404; }
+.db-badge.low { background: #d4edda; color: #155724; }
+.wf-anno { font-size: 11px; color: #888; border-left: 3px solid #ccc; padding-left: 8px; margin: 4px 0; }
+</style>
+
+<div style="padding: 8px 0;">
+  <p style="font-size:12px; font-weight:500; color:var(--color-text-secondary); margin:0 0 10px; text-transform:uppercase; letter-spacing:.05em;">Admin dashboard — Sarah's web view (after login)</p>
+
+  <div class="db">
+    <div class="db-nav">
+      <span class="db-nav-logo">TaskFlow <span class="db-nav-badge">Admin</span></span>
+      <span class="db-nav-user">Sarah  |  Sign out</span>
+    </div>
+    <div class="db-body">
+      <div class="db-sidebar">
+        <div class="db-sidebar-section">Main</div>
+        <div class="db-sidebar-item active">Dashboard</div>
+        <div class="db-sidebar-item">All tasks</div>
+        <div class="db-sidebar-item">Create task</div>
+        <div class="db-sidebar-section">Team</div>
+        <div class="db-sidebar-item">Staff list</div>
+        <div class="db-sidebar-item">Reports</div>
+        <div class="db-sidebar-section">Settings</div>
+        <div class="db-sidebar-item">Manage users</div>
+      </div>
+      <div class="db-main">
+        <div class="db-topbar">
+          <span class="db-topbar-title">All tasks overview</span>
+          <button class="db-btn">+ New task</button>
+        </div>
+
+        <div class="db-stats">
+          <div class="db-stat"><div class="db-stat-label">Total tasks</div><div class="db-stat-num">24</div></div>
+          <div class="db-stat"><div class="db-stat-label">In progress</div><div class="db-stat-num amber">8</div></div>
+          <div class="db-stat"><div class="db-stat-label">Done — unverified</div><div class="db-stat-num amber">5</div></div>
+          <div class="db-stat"><div class="db-stat-label">Overdue</div><div class="db-stat-num red">3</div></div>
+        </div>
+
+        <div class="db-filters">
+          <div class="db-filter active">All</div>
+          <div class="db-filter">To do</div>
+          <div class="db-filter">In progress</div>
+          <div class="db-filter">Done</div>
+          <div class="db-filter">Verified</div>
+          <div class="db-filter" style="margin-left:auto;">Filter by staff ▾</div>
+        </div>
+
+        <div class="db-table-head">
+          <span>Task name</span>
+          <span>Assigned to</span>
+          <span>Due date</span>
+          <span>Priority</span>
+          <span>Status</span>
+        </div>
+
+        <div class="db-row">
+          <span>Write client report Q1</span>
+          <span>Budi</span>
+          <span>24 Mar</span>
+          <span><div class="db-badge high">High</div></span>
+          <span><div class="db-badge prog">In progress</div></span>
+        </div>
+        <div class="db-row">
+          <span>Design social media banner</span>
+          <span>Rina</span>
+          <span>25 Mar</span>
+          <span><div class="db-badge med">Medium</div></span>
+          <span><div class="db-badge done">Done</div></span>
+        </div>
+        <div class="db-row">
+          <span>Update website homepage copy</span>
+          <span>Deni</span>
+          <span>22 Mar</span>
+          <span><div class="db-badge high">High</div></span>
+          <span><div class="db-badge todo" style="background:#f8d7da;color:#721c24;">Overdue</div></span>
+        </div>
+        <div class="db-row">
+          <span>Send newsletter to client list</span>
+          <span>Sari</span>
+          <span>26 Mar</span>
+          <span><div class="db-badge low">Low</div></span>
+          <span><div class="db-badge verif">Verified</div></span>
+        </div>
+        <div class="db-row">
+          <span>Prepare monthly analytics summary</span>
+          <span>Budi</span>
+          <span>28 Mar</span>
+          <span><div class="db-badge med">Medium</div></span>
+          <span><div class="db-badge todo">To do</div></span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div style="margin-top:14px; display:grid; grid-template-columns:1fr 1fr; gap:8px;">
+    <div>
+      <div class="wf-anno">Dark sidebar — always visible, easy navigation</div>
+      <div class="wf-anno">4 stat cards show instant health of all tasks</div>
+      <div class="wf-anno">Filter bar — Sarah can filter by status or staff member</div>
+    </div>
+    <div>
+      <div class="wf-anno">Colour-coded status badges — scannable at a glance</div>
+      <div class="wf-anno">Click any row → opens task detail & verify button</div>
+      <div class="wf-anno">"Done — unverified" alerts Sarah to tasks needing check</div>
+    </div>
+  </div>
+</div>
