@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskFlow — How React Connects to Backend</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; background: #fff; color: #222; }
+  h1 { font-size: 22px; font-weight: 600; color: #1a1a2e; border-bottom: 2px solid #2E75B6; padding-bottom: 10px; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 28px; }
+  .flow-summary { display: flex; align-items: center; gap: 0; margin-bottom: 32px; flex-wrap: wrap; gap: 4px; }
+  .flow-pill { padding: 8px 14px; border-radius: 20px; font-size: 12px; font-weight: 600; }
+  .flow-arr { font-size: 16px; color: #bbb; }
+  .step-card { border: 1px solid #e0e0e0; border-radius: 10px; margin-bottom: 16px; overflow: hidden; }
+  .step-header { display: flex; align-items: center; gap: 14px; padding: 14px 18px; background: #f8f8f8; border-bottom: 1px solid #e0e0e0; }
+  .step-num { width: 28px; height: 28px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: #fff; flex-shrink: 0; }
+  .step-title { font-size: 14px; font-weight: 600; color: #1a1a2e; }
+  .step-layer { font-size: 11px; color: #888; margin-top: 1px; }
+  .step-body { padding: 16px 18px; }
+  .step-desc { font-size: 13px; color: #444; line-height: 1.7; margin-bottom: 14px; }
+  .code-block { background: #1e1e1e; color: #d4d4d4; border-radius: 8px; padding: 14px 16px; font-family: 'Courier New', monospace; font-size: 12px; line-height: 1.7; overflow-x: auto; white-space: pre; }
+  .c-blue { color: #569cd6; }
+  .c-green { color: #4ec9b0; }
+  .c-yellow { color: #dcdcaa; }
+  .c-orange { color: #ce9178; }
+  .c-gray { color: #6a9955; }
+  .key-rule { background: #f0f7ff; border-left: 4px solid #2E75B6; border-radius: 0 6px 6px 0; padding: 10px 14px; font-size: 12px; color: #1a1a2e; margin-top: 8px; line-height: 1.6; }
+  .footer { margin-top: 28px; font-size: 11px; color: #aaa; border-top: 1px solid #eee; padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>How React Admin Dashboard Connects to the Backend</h1>
+<div class="subtitle">Phase 3 — System Architecture  |  Request & Response Flow  |  22 March 2026</div>
+
+<div class="flow-summary">
+  <div class="flow-pill" style="background:#dbeafe; color:#1d4ed8;">React</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-pill" style="background:#fef3c7; color:#92400e;">Axios</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-pill" style="background:#d1fae5; color:#065f46;">Express</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-pill" style="background:#d1fae5; color:#065f46;">Prisma</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-pill" style="background:#fef3c7; color:#92400e;">PostgreSQL</div>
+  <div class="flow-arr">→</div>
+  <div class="flow-pill" style="background:#dbeafe; color:#1d4ed8;">React displays</div>
+</div>
+
+<!-- Step 1 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num" style="background:#2563eb;">1</div>
+    <div>
+      <div class="step-title">Sarah opens the dashboard</div>
+      <div class="step-layer">Layer: React frontend</div>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="step-desc">Sarah loads taskflow.app in her browser. React renders the dashboard page. The component needs task data — so it fires a request using Axios. This happens automatically when the page loads.</div>
+    <div class="code-block"><span class="c-gray">// In React — TaskDashboard.jsx</span>
+<span class="c-blue">useEffect</span>(() => {
+  <span class="c-yellow">fetchTasks</span>();         <span class="c-gray">// runs when page loads</span>
+}, []);
+
+<span class="c-blue">const</span> <span class="c-yellow">fetchTasks</span> = <span class="c-blue">async</span> () => {
+  <span class="c-blue">const</span> response = <span class="c-blue">await</span> axios.<span class="c-yellow">get</span>(<span class="c-orange">'/api/tasks'</span>);
+  <span class="c-yellow">setTasks</span>(response.data);  <span class="c-gray">// store in React state</span>
+};</div>
+  </div>
+</div>
+
+<!-- Step 2 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num" style="background:#d97706;">2</div>
+    <div>
+      <div class="step-title">Axios sends the request</div>
+      <div class="step-layer">Layer: Axios (the messenger)</div>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="step-desc">Axios takes the request and sends it over the internet to the backend server using HTTPS. It also automatically attaches Sarah's login token (JWT) to the request header — so the backend knows who is asking.</div>
+    <div class="code-block"><span class="c-gray">// Axios config — set up once in api.js</span>
+<span class="c-blue">const</span> api = axios.<span class="c-yellow">create</span>({
+  baseURL: <span class="c-orange">'https://taskflow-api.railway.app'</span>,
+  headers: {
+    <span class="c-orange">'Authorization'</span>: <span class="c-orange">'Bearer '</span> + userToken
+    <span class="c-gray">// Sarah's JWT login token — proves who she is</span>
+  }
+});
+
+<span class="c-gray">// Every request automatically includes this token</span></div>
+  </div>
+</div>
+
+<!-- Step 3 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num" style="background:#059669;">3</div>
+    <div>
+      <div class="step-title">Backend receives the request</div>
+      <div class="step-layer">Layer: Express backend (Node.js)</div>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="step-desc">The Express server receives the request at the /api/tasks route. First it checks the JWT token — is this a real logged-in user? Is she an admin? If yes, it proceeds. If not, it immediately returns a 401 Unauthorized error.</div>
+    <div class="code-block"><span class="c-gray">// In Express — tasks.routes.js</span>
+router.<span class="c-yellow">get</span>(<span class="c-orange">'/api/tasks'</span>,
+  verifyToken,      <span class="c-gray">// check JWT first</span>
+  checkAdmin,       <span class="c-gray">// is this Sarah (admin)?</span>
+  <span class="c-blue">async</span> (req, res) => {
+    <span class="c-gray">// only reaches here if token is valid</span>
+    <span class="c-blue">const</span> tasks = <span class="c-blue">await</span> prisma.task.<span class="c-yellow">findMany</span>();
+    res.<span class="c-yellow">json</span>(tasks);   <span class="c-gray">// send tasks back</span>
+  }
+);</div>
+    <div class="key-rule">Security rule: Even if someone hacks the React code, the backend always checks the real role from the database. All security lives in the backend — never in the frontend.</div>
+  </div>
+</div>
+
+<!-- Step 4 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num" style="background:#d97706;">4</div>
+    <div>
+      <div class="step-title">Prisma queries the database</div>
+      <div class="step-layer">Layer: Prisma + PostgreSQL</div>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="step-desc">Express tells Prisma to fetch all tasks from the PostgreSQL database. Prisma translates this into a SQL query, runs it, and returns the results as clean JavaScript objects — no complex SQL needed!</div>
+    <div class="code-block"><span class="c-gray">// Prisma query — reads like plain English</span>
+<span class="c-blue">const</span> tasks = <span class="c-blue">await</span> prisma.task.<span class="c-yellow">findMany</span>({
+  include: {
+    assignedTo: <span class="c-blue">true</span>,   <span class="c-gray">// include staff name</span>
+    createdBy: <span class="c-blue">true</span>,    <span class="c-gray">// include who made it</span>
+  },
+  orderBy: {
+    due_date: <span class="c-orange">'asc'</span>     <span class="c-gray">// sorted by due date</span>
+  }
+});
+<span class="c-gray">// returns array of task objects</span></div>
+  </div>
+</div>
+
+<!-- Step 5 -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num" style="background:#059669;">5</div>
+    <div>
+      <div class="step-title">Response travels back to React</div>
+      <div class="step-layer">Layer: Backend → React</div>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="step-desc">The backend sends the tasks back as JSON data over HTTPS. Axios receives it on the frontend. React stores it in state and automatically re-renders the dashboard — Sarah now sees her task list on screen.</div>
+    <div class="code-block"><span class="c-gray">// Backend sends this JSON response:</span>
+[
+  {
+    id: <span class="c-orange">"abc-123"</span>,
+    title: <span class="c-orange">"Write client report Q1"</span>,
+    assignedTo: { name: <span class="c-orange">"Budi"</span> },
+    status: <span class="c-orange">"IN_PROGRESS"</span>,
+    due_date: <span class="c-orange">"2026-03-24"</span>,
+    priority: <span class="c-orange">"HIGH"</span>
+  },
+  <span class="c-gray">// ... more tasks</span>
+]
+
+<span class="c-gray">// React receives it → dashboard updates instantly</span></div>
+  </div>
+</div>
+
+<!-- Full picture -->
+<div class="step-card">
+  <div class="step-header">
+    <div class="step-num" style="background:#1a1a2e;">6</div>
+    <div>
+      <div class="step-title">The full picture — complete flow</div>
+      <div class="step-layer">Summary of the entire request cycle</div>
+    </div>
+  </div>
+  <div class="step-body">
+    <div class="step-desc">Every button click and page load in the app follows this exact same pattern. The only thing that changes is the endpoint URL and what data is sent or received.</div>
+    <div class="code-block">SARAH'S BROWSER          INTERNET           SERVER + DATABASE
+─────────────────        ────────        ──────────────────────
+React component
+  │
+  └─ axios.get()  ──── HTTPS request ──→  Express router
+                        (with JWT)            │
+                                          verifyToken()
+                                              │
+                                          Prisma query
+                                              │
+  setTasks(data)  &lt;─── JSON response ───  res.json(tasks)
+  │
+  └─ render() → Sarah sees tasks on screen</div>
+    <div class="key-rule">The golden rule: React never talks directly to the database. It always goes through the API. This keeps data safe and the app organized.</div>
+  </div>
+</div>
+
+<div class="footer">
+  Prepared by: Andisatriawan (andisatriawancoderdev) &nbsp;|&nbsp; TaskFlow Project &nbsp;|&nbsp; Phase 3 — System Architecture &nbsp;|&nbsp; 22 March 2026
+</div>
+
+</body>
+</html>

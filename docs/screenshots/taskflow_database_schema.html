@@ -1,0 +1,87 @@
+
+<div id="erd" style="padding:8px 0;"></div>
+<script type="module">
+import mermaid from 'https://esm.sh/mermaid@11/dist/mermaid.esm.min.mjs';
+const dark = matchMedia('(prefers-color-scheme: dark)').matches;
+await document.fonts.ready;
+mermaid.initialize({
+  startOnLoad: false,
+  theme: 'base',
+  fontFamily: '"Anthropic Sans", sans-serif',
+  themeVariables: {
+    darkMode: dark,
+    fontSize: '13px',
+    fontFamily: '"Anthropic Sans", sans-serif',
+    lineColor: dark ? '#9c9a92' : '#73726c',
+    textColor: dark ? '#c2c0b6' : '#3d3d3a',
+  },
+});
+const { svg } = await mermaid.render('erd-svg', `erDiagram
+  USERS {
+    uuid id PK
+    string name
+    string email
+    string password_hash
+    enum role
+    boolean is_active
+    timestamp created_at
+  }
+  TASKS {
+    uuid id PK
+    string title
+    text description
+    uuid assigned_to FK
+    uuid created_by FK
+    enum status
+    enum priority
+    date due_date
+    timestamp completed_at
+    timestamp verified_at
+    uuid verified_by FK
+    timestamp created_at
+  }
+  TASK_NOTES {
+    uuid id PK
+    uuid task_id FK
+    uuid user_id FK
+    text content
+    timestamp created_at
+  }
+  TASK_FILES {
+    uuid id PK
+    uuid task_id FK
+    string file_url
+    string file_name
+    timestamp uploaded_at
+  }
+  USERS ||--o{ TASKS : "assigned to"
+  USERS ||--o{ TASKS : "created by"
+  TASKS ||--o{ TASK_NOTES : "has notes"
+  TASKS ||--o{ TASK_FILES : "has files"
+  USERS ||--o{ TASK_NOTES : "wrote"
+`);
+document.getElementById('erd').innerHTML = svg;
+
+document.querySelectorAll('#erd svg.erDiagram .node').forEach(node => {
+  const firstPath = node.querySelector('path[d]');
+  if (!firstPath) return;
+  const d = firstPath.getAttribute('d');
+  const nums = d.match(/-?[\d.]+/g)?.map(Number);
+  if (!nums || nums.length < 8) return;
+  const xs = [nums[0], nums[2], nums[4], nums[6]];
+  const ys = [nums[1], nums[3], nums[5], nums[7]];
+  const x = Math.min(...xs), y = Math.min(...ys);
+  const w = Math.max(...xs) - x, h = Math.max(...ys) - y;
+  const rect = document.createElementNS('http://www.w3.org/2000/svg', 'rect');
+  rect.setAttribute('x', x); rect.setAttribute('y', y);
+  rect.setAttribute('width', w); rect.setAttribute('height', h);
+  rect.setAttribute('rx', '8');
+  for (const a of ['fill', 'stroke', 'stroke-width', 'class', 'style']) {
+    if (firstPath.hasAttribute(a)) rect.setAttribute(a, firstPath.getAttribute(a));
+  }
+  firstPath.replaceWith(rect);
+});
+document.querySelectorAll('#erd svg.erDiagram .row-rect-odd path, #erd svg.erDiagram .row-rect-even path').forEach(p => {
+  p.setAttribute('stroke', 'none');
+});
+</script>

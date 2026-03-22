@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>TaskFlow API Design</title>
+<style>
+  body { font-family: Arial, sans-serif; max-width: 860px; margin: 0 auto; padding: 24px; background: #fff; color: #222; }
+  h1 { font-size: 22px; font-weight: 600; color: #1a1a2e; border-bottom: 2px solid #2E75B6; padding-bottom: 10px; margin-bottom: 6px; }
+  .subtitle { font-size: 13px; color: #888; margin-bottom: 28px; }
+  .group { margin-bottom: 24px; }
+  .group-title { font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: .06em; color: #555; padding-bottom: 6px; border-bottom: 1px solid #eee; margin-bottom: 10px; }
+  .api-row { display: grid; grid-template-columns: 80px 240px 1fr 80px; gap: 12px; align-items: center; padding: 8px 10px; border-radius: 6px; margin-bottom: 5px; background: #f8f8f8; border: 1px solid #eee; }
+  .method { font-size: 11px; font-weight: 600; padding: 3px 8px; border-radius: 4px; text-align: center; }
+  .get  { background: #d4edda; color: #155724; }
+  .post { background: #cce5ff; color: #004085; }
+  .patch { background: #fff3cd; color: #856404; }
+  .delete { background: #f8d7da; color: #721c24; }
+  .path { font-family: monospace; font-size: 12px; color: #1a1a2e; }
+  .desc { font-size: 12px; color: #444; }
+  .badge { display: inline-block; font-size: 9px; padding: 1px 6px; border-radius: 8px; margin-left: 5px; background: #f8d7da; color: #721c24; font-weight: 600; }
+  .auth-badge { background: #e2e3e5; color: #383d41; }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; margin-bottom: 20px; font-size: 12px; }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .legend-dot { width: 32px; height: 18px; border-radius: 4px; font-size: 10px; font-weight: 600; display: flex; align-items: center; justify-content: center; }
+  .footer { margin-top: 28px; font-size: 11px; color: #aaa; border-top: 1px solid #eee; padding-top: 12px; }
+</style>
+</head>
+<body>
+
+<h1>TaskFlow — API Design Reference</h1>
+<div class="subtitle">Phase 3 — System Architecture  |  All REST API endpoints  |  Version 1.0  |  22 March 2026</div>
+
+<div class="legend">
+  <div class="legend-item"><div class="legend-dot" style="background:#d4edda; color:#155724;">GET</div> Fetch data</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#cce5ff; color:#004085;">POST</div> Create new</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#fff3cd; color:#856404;">PATCH</div> Update existing</div>
+  <div class="legend-item"><div class="legend-dot" style="background:#f8d7da; color:#721c24;">DELETE</div> Remove</div>
+  <div class="legend-item"><span style="background:#f8d7da; color:#721c24; padding:2px 7px; border-radius:8px; font-size:10px; font-weight:600;">admin</span> Admin only</div>
+</div>
+
+<div class="group">
+  <div class="group-title">Authentication</div>
+  <div class="api-row">
+    <div class="method post">POST</div>
+    <div class="path">/api/auth/login</div>
+    <div class="desc">Login with email & password — returns JWT token</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method post">POST</div>
+    <div class="path">/api/auth/logout</div>
+    <div class="desc">Logout — invalidates current session token</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/auth/me</div>
+    <div class="desc">Get current logged-in user profile and role</div>
+    <div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Users</div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/users</div>
+    <div class="desc">Get all staff members <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/users/:id</div>
+    <div class="desc">Get one user's profile details <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method post">POST</div>
+    <div class="path">/api/users</div>
+    <div class="desc">Create a new staff account <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method patch">PATCH</div>
+    <div class="path">/api/users/:id</div>
+    <div class="desc">Update staff name, email or active status <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Tasks</div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/tasks</div>
+    <div class="desc">Get tasks — admin sees all, staff sees own tasks only</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/tasks/:id</div>
+    <div class="desc">Get full detail of one task including notes and files</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method post">POST</div>
+    <div class="path">/api/tasks</div>
+    <div class="desc">Create and assign a new task to a staff member <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method patch">PATCH</div>
+    <div class="path">/api/tasks/:id</div>
+    <div class="desc">Edit task title, description, due date or priority <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method patch">PATCH</div>
+    <div class="path">/api/tasks/:id/status</div>
+    <div class="desc">Update task status — staff updates their own tasks only</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method patch">PATCH</div>
+    <div class="path">/api/tasks/:id/verify</div>
+    <div class="desc">Verify or reject a completed task <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method delete">DELETE</div>
+    <div class="path">/api/tasks/:id</div>
+    <div class="desc">Permanently delete a task <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Task Notes</div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/tasks/:id/notes</div>
+    <div class="desc">Get all notes for a specific task</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method post">POST</div>
+    <div class="path">/api/tasks/:id/notes</div>
+    <div class="desc">Add a new note or comment to a task</div>
+    <div></div>
+  </div>
+</div>
+
+<div class="group">
+  <div class="group-title">Task Files</div>
+  <div class="api-row">
+    <div class="method get">GET</div>
+    <div class="path">/api/tasks/:id/files</div>
+    <div class="desc">Get all file attachments for a task</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method post">POST</div>
+    <div class="path">/api/tasks/:id/files</div>
+    <div class="desc">Upload a file attachment to a task (stored in Cloudinary)</div>
+    <div></div>
+  </div>
+  <div class="api-row">
+    <div class="method delete">DELETE</div>
+    <div class="path">/api/tasks/:id/files/:fileId</div>
+    <div class="desc">Delete a specific file attachment <span class="badge">admin</span></div>
+    <div></div>
+  </div>
+</div>
+
+<div class="footer">
+  Prepared by: Andisatriawan (andisatriawancoderdev) &nbsp;|&nbsp; TaskFlow Project &nbsp;|&nbsp; Phase 3 — System Architecture &nbsp;|&nbsp; All endpoints require Authorization: Bearer &lt;token&gt; header except /api/auth/login
+</div>
+
+</body>
+</html>
